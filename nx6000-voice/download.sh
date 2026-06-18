@@ -39,6 +39,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 echo "Baixando pacote..."
+echo "URL: $TARBALL_URL"
 
 curl --fail --show-error --silent --location \
     --proto '=https' --tlsv1.2 \
