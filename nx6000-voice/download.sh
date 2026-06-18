@@ -9,7 +9,7 @@ APP_NAME="nx6000-voice"
 VERSION="v1.0.0"
 BASE_URL="https://noxxonsat.github.io/deploy/$APP_NAME/$VERSION/"
 TARBALL_URL="${BASE_URL}$APP_NAME-$VERSION.tar.gz"
-CHECKSUM_URL="${BASE_URL}$APP_NAME-$VERSION.sha256"
+CHECKSUM_URL="${TARBALL_URL}.sha256"
 INSTALL_SCRIPT="deploy/install.sh"
 TMP_DIR=$(mktemp -d)
 
@@ -47,6 +47,7 @@ curl --fail --show-error --silent --location \
     "$TARBALL_URL" -o "$TMP_DIR/$APP_NAME.tar.gz"
 
 echo "Baixando arquivo de verificação..."
+echo "URL: $CHECKSUM_URL"
 
 curl --fail --show-error --silent --location \
     --proto '=https' --tlsv1.2 \
