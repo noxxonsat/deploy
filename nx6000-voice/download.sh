@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # Script de download e instalação do aplicativo nx6000-voice
-# executar como root: curl -fsSL URL | sudo bash
+# executar como root: curl -fsSL https://noxxonsat.github.io/deploy/nx6000-voice/download.sh | sudo bash
 
 set -euo pipefail
 
 APP_NAME="nx6000-voice"
-BASE_URL="https://noxxonsat.github.io/deploy/$APP_NAME/"
-TARBALL_URL="${BASE_URL}$APP_NAME.tar.gz"
-CHECKSUM_URL="${BASE_URL}$APP_NAME.sha256"
+VERSION="v1.0.0"
+BASE_URL="https://noxxonsat.github.io/deploy/$APP_NAME/$VERSION/"
+TARBALL_URL="${BASE_URL}$APP_NAME-$VERSION.tar.gz"
+CHECKSUM_URL="${BASE_URL}$APP_NAME-$VERSION.sha256"
 INSTALL_SCRIPT="deploy/install.sh"
 TMP_DIR=$(mktemp -d)
 
@@ -33,7 +34,7 @@ require_cmd find
 
 if [ "$EUID" -ne 0 ]; then
     echo "Execute como root:"
-    echo "curl -fsSL URL | sudo bash"
+    echo "curl -fsSL https://noxxonsat.github.io/deploy/$APP_NAME/download.sh | sudo bash"
     exit 1
 fi
 
