@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# Script de download e instalação do aplicativo nx6000-pmv
+# Script de download e instalação do aplicativo nx6000-voice
 # executar como root: curl -fsSL URL | sudo bash
 
 set -euo pipefail
 
-APP_NAME="nx6000-pmv"
-TARBALL_URL="https://cftv-files.noxxonsat.com.br/api/public/dl/xR7WeBzd?inline=true"
-CHECKSUM_URL="https://cftv-files.noxxonsat.com.br/api/public/dl/Jds-5T02?inline=true"
+APP_NAME="nx6000-voice"
+BASE_URL="https://noxxonsat.github.io/deploy/$APP_NAME/"
+TARBALL_URL="${BASE_URL}$APP_NAME.tar.gz"
+CHECKSUM_URL="${BASE_URL}$APP_NAME.sha256"
+INSTALL_SCRIPT="deploy/install.sh"
 TMP_DIR=$(mktemp -d)
 
 require_cmd() {
@@ -82,11 +84,11 @@ echo "Executando instalador..."
 
 cd "$APP_DIR" || exit 1
 
-if [ ! -f "./install.sh" ]; then
-    echo "Erro: install.sh não encontrado em $APP_DIR"
+if [ ! -f "$INSTALL_SCRIPT" ]; then
+    echo "Erro: $INSTALL_SCRIPT não encontrado em $APP_DIR"
     exit 1
 fi
 
-bash ./install.sh
+bash "$INSTALL_SCRIPT"
 
 echo "Instalação concluída."
